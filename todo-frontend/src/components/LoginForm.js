@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { unwrapResult } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../store/authSlice';
 import styles from '../styles/LoginForm.module.css';
@@ -16,7 +17,12 @@ export const LoginForm = () => {
       return;
     }
 
-    dispatch(login({ username, password }));
+    dispatch(login({ username, password }))
+    .then(unwrapResult)
+    .catch(error => {
+      
+      alert('Failed to login: ' + error.message);
+    });
   };
 
   if (admin) {

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { unwrapResult } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { updateTask } from '../store/tasksSlice';
 import styles from '../styles/TaskEditForm.module.css';
@@ -18,7 +19,13 @@ export const TaskEditForm = ({ task, onDone }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(updateTask({ ...task, taskText, completed, edited: onIsEdited() }));
+
+    dispatch(updateTask({ ...task, taskText, completed, edited: onIsEdited() }))
+    .then(unwrapResult)
+    .catch(error => {
+
+      alert(error.message);
+    });
     onDone();
   };
 

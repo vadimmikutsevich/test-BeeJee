@@ -1,20 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+const api = axios.create({
+  baseURL: 'http://localhost:8080',
+});
+
 export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async ({ sortOrder, page }) => {
-  const response = await axios.get('http://localhost:8080/tasks', {
+  const response = await api.get('/tasks', {
     params: { order: sortOrder, limit: 3, offset: page * 3 }
   });
   return response.data;
 });
 
 export const addTask = createAsyncThunk('tasks/addTask', async (task) => {
-  const response = await axios.post('http://localhost:8080/tasks', task);
+  const response = await api.post('/tasks', task);
   return response.data;
 });
 
 export const updateTask = createAsyncThunk('tasks/updateTask', async (task) => {
-  const response = await axios.put(`http://localhost:8080/tasks/${task.id}`, task, { withCredentials: true });
+  const response = await api.put(`/tasks/${task.id}`, task, { withCredentials: true });
   return response.data;
 });
 

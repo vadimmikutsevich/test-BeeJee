@@ -1,9 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+const api = axios.create({
+  baseURL: 'http://localhost:8080',
+  withCredentials: true
+});
+
 export const login = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
   try {
-    const response = await axios.post('http://localhost:8080/auth/login', credentials, { withCredentials: true });
+    const response = await api.post('/auth/login', credentials);
     return response.data
   } catch (err) {
     return rejectWithValue(err.response.data);
@@ -12,7 +17,7 @@ export const login = createAsyncThunk('auth/login', async (credentials, { reject
 
 export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
   try {
-    const response = await axios.post('http://localhost:8080/auth/logout', {}, { withCredentials: true });
+    const response = await api.post('/auth/logout');
     return response.data;
   } catch (err) {
     return rejectWithValue(err.response.data);
@@ -21,8 +26,7 @@ export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValu
 
 export const checkSession = createAsyncThunk('auth/check', async (_, {rejectWithValue}) => {
   try {
-    const response = await axios.get('http://localhost:8080/auth/check', { withCredentials: true });
-    console.log(response.data.admin)
+    const response = await api.get('/auth/check');
     return response.data;
   } catch(err) {
     return rejectWithValue(err.response.data);

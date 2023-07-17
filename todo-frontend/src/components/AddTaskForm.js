@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { unwrapResult } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { addTask } from '../store/tasksSlice';
 import styles from '../styles/AddTaskForm.module.css'
@@ -26,11 +27,19 @@ export const AddTaskForm = () => {
       return;
     }
 
-    dispatch(addTask({ username, email, taskText }));
-    setUsername('')
-    setEmail('')
-    setTaskText('')
+    dispatch(addTask({ username, email, taskText }))
+    .then(unwrapResult)
+    .then(response => {
 
+      alert('Task added successfully');
+      setUsername('');
+      setEmail('');
+      setTaskText('');
+    })
+    .catch(error => {
+      
+      alert('Failed to add task: ' + error.message);
+    });
   };
 
   return (
