@@ -34,8 +34,12 @@ export const Task = ({ task }) => {
             <td>{task.email}</td>
             <td><span dangerouslySetInnerHTML={{ __html: task.taskText }} /></td>
             <td>
-                {task.completed ? <span>Completed</span> : <span>Not completed</span>}
-                {task.edited && <span>Edited by admin</span>}
+                <div>
+                    {task.completed ? <span>Completed</span> : <span>Not completed</span>}
+                </div>
+                <div>
+                    {task.edited && <span className={styles.editedByAdmin}>Edited by admin</span>}
+                </div>
             </td>
         </tr>
     );

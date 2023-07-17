@@ -19,6 +19,16 @@ export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValu
   }
 });
 
+export const checkSession = createAsyncThunk('auth/check', async (_, {rejectWithValue}) => {
+  try {
+    const response = await axios.get('http://localhost:8080/auth/check', { withCredentials: true });
+    console.log(response.data.admin)
+    return response.data;
+  } catch(err) {
+    return rejectWithValue(err.response.data);
+  }
+})
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState: { admin: false, status: 'idle', error: null },
@@ -32,6 +42,16 @@ export const authSlice = createSlice({
         state.admin = action.payload.admin;
       })
       .addCase(login.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(checkSession.pending, state => {
+        state.status = 'loading';
+      })
+      .addCase(checkSession.fulfilled, (state, action) => {
+        state.admin = action.payload.admin;
+      })
+      .addCase(checkSession.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })

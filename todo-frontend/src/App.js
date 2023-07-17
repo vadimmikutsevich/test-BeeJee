@@ -1,14 +1,19 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { TasksList } from './components/TasksList';
 import { AddTaskForm } from './components//AddTaskForm';
 import { LoginForm } from './components/LoginForm';
 import { Header } from './components/Header';
-// import { logout, login } from './store/authSlice';
+import { checkSession } from './store/authSlice';
 import styles from './styles/App.module.css';
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(checkSession())
+  }, [dispatch])
 
   return (
     <Router>
