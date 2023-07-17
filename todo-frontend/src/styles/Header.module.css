@@ -1,0 +1,17 @@
+.title {
+    font-size: 2rem;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+.link {
+    color: aquamarine;
+}
+
+.active_link {
+    color: gainsboro;
+    cursor: default;
+}

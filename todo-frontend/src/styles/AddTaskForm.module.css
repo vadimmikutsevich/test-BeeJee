@@ -1,0 +1,57 @@
+.form {
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.customInput {
+    border-radius: 15px;
+    border: 1px solid azure;
+    font-size: 1rem;
+    padding: 5px;
+    box-shadow: 0px 0px 21px -7px azure;
+}
+
+.customInput:nth-child(1) {
+    margin-right: 0.5rem;
+}
+
+.customInput::placeholder {
+    color: gainsboro;
+    font-size: 1rem;
+    padding: 5px;
+}
+
+.customInput:focus {
+    box-shadow: none;
+    border: 1px solid gainsboro;
+}
+
+.textareaContainer {
+    margin-top: 0.5rem;
+}
+
+.textarea {
+    font-size: 1rem;
+    padding: 5px;
+    height: 80px;
+}
+
+.textarea::placeholder {
+    color: gainsboro;
+    font-size: 1rem;
+}
+
+.textarea:focus {
+    outline: none;
+    box-shadow: 0px 0px 21px -7px azure;
+    border: 1px solid azure;
+    border-radius: 15px;
+}
+
+.addBtn {
+    margin-top: 0.5rem;
+    padding: 5px 15px;
+    box-shadow: 0px 0px 21px -7px azure;
+    border-radius: 15px;
+    border: 1px solid azure;
+}

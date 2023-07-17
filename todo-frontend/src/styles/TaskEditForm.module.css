@@ -1,0 +1,17 @@
+.form {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.textInput {
+    border: 1px solid gainsboro;
+    border-radius: 15px;
+    border: 1px solid azure;
+    font-size: 1rem;
+    padding: 5px;
+}
+
+.checkbox {
+    margin-right: 0.2rem;
+}

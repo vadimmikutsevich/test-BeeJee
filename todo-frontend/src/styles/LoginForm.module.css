@@ -1,0 +1,41 @@
+.form {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.customInput {
+    border-radius: 15px;
+    border: 1px solid azure;
+    font-size: 1rem;
+    padding: 5px;
+    box-shadow: 0px 0px 21px -7px azure;
+}
+
+.customInput:nth-child(1) {
+    margin-right: 0.5rem;
+}
+
+.customInput:focus {
+    box-shadow: none;
+    border: 1px solid gainsboro;
+}
+
+.customInput::placeholder {
+    color: gainsboro;
+    font-size: 1rem;
+    padding: 5px;
+}
+
+.loginBtn {
+    margin-top: 0.5rem;
+    padding: 5px 15px;
+    box-shadow: 0px 0px 21px -7px azure;
+    border-radius: 15px;
+    border: 1px solid azure;
+}
