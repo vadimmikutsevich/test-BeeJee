@@ -21,4 +21,12 @@ router.post('/logout', (req, res) => {
   });
 });
 
+router.get('/check', (req, res) => {
+  if(req.session.admin) {
+    res.json({ admin: true });
+  } else {
+    res.json({ admin: false });
+  }
+})
+
 module.exports = router;
