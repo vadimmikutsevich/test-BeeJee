@@ -5,7 +5,7 @@ router.post('/login', (req, res) => {
   const { username, password } = req.body;
   if (username === 'admin' && password === '123') {
     req.session.admin = true;
-    res.json({ admin: true });
+    res.json({ admin: req.session.admin });
   } else {
     res.status(401).json({ message: 'Invalid username or password' });
   }

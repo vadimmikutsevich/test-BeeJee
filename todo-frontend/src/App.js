@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { TasksList } from './components/TasksList';
@@ -15,6 +15,13 @@ function App() {
     dispatch(checkSession())
   }, [dispatch])
 
+  const HomePage = () => {
+    return <>
+      <TasksList />
+      <AddTaskForm />
+    </>
+  }
+
   return (
     <Router>
       <div className={styles.wrapper}>
@@ -23,11 +30,9 @@ function App() {
 
           <Routes>
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/" element={
-            <>
-              <TasksList />
-              <AddTaskForm />
-            </>} />
+            <Route path="/" element={ <HomePage />} />
+
+            <Route path="*" element={<HomePage />} />
           </Routes>
         </div>
       </div>

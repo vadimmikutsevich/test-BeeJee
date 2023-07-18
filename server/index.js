@@ -21,10 +21,7 @@ app.use(cors({
   credentials: true
 }));
 
-if (process.env.NODE_ENV === 'production') {
-  app.set('trust proxy', 1);
-}
-
+app.set("trust proxy", 1);
 app.use(session({
   store: new pgSession({
     conObject: {
@@ -38,12 +35,18 @@ app.use(session({
   secret: 'secret-key',
   resave: false,
   saveUninitialized: false,
+  proxy: true,
   cookie: {
-    secure: process.env.NODE_ENV === 'production',
+    secure: true,
+    sameSite: 'none',
     httpOnly: true,
-    sameSite: 'lax',
+    maxAge: 1000 * 60 * 60 * 48,
   }
-}));
+}), (req, res, next) => {
+  console.log(req.session.admin);
+  next();
+});
+
 app.use(bodyParser.json());
 
 // routes
