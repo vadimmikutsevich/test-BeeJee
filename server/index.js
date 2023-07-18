@@ -20,6 +20,11 @@ app.use(cors({
   origin: process.env.CLIENT_HOST,
   credentials: true
 }));
+
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+}
+
 app.use(session({
   store: new pgSession({
     conObject: {
@@ -33,6 +38,11 @@ app.use(session({
   secret: 'secret-key',
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: true,
+    sameSite: 'lax',
+  }
 }));
 app.use(bodyParser.json());
 
