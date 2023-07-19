@@ -7,7 +7,7 @@ import styles from '../styles/TasksList.module.css';
 
 export const TasksList = () => {
   const dispatch = useDispatch();
-  const tasks = useSelector(state => state.tasks.tasks);
+  const { tasks, status } = useSelector(state => state.tasks);
   const totalTasks = useSelector(state => state.tasks.totalTasks);
   const [sortOrder, setSortOrder] = useState('username,ASC');
   const [page, setPage] = useState(0);
@@ -74,7 +74,9 @@ export const TasksList = () => {
         </thead>
 
         <tbody className={styles.tbody}>
-          {tasks.map(task => (
+          {status === 'loading' && <h4>Loading...</h4>}
+
+          {status !== 'loading' && tasks.map(task => (
             <Task key={task.id} task={task} />
           ))}
         </tbody>

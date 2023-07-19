@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addTask } from '../store/tasksSlice';
 import styles from '../styles/AddTaskForm.module.css'
 
@@ -8,6 +8,7 @@ export const AddTaskForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [taskText, setTaskText] = useState('');
+  const { status } = useSelector(state => state.tasks);
   const dispatch = useDispatch();
 
   const validateEmail = (email) => {
@@ -71,7 +72,7 @@ export const AddTaskForm = () => {
         />
       </div>
 
-      <button className={styles.addBtn} type="submit">Add Task</button>
+      <button className={styles.addBtn} type="submit" disabled={status === 'loading'}>Add Task</button>
     </form>
   );
 };
